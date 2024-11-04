@@ -1,19 +1,22 @@
-** Δ′17OBW Model and Dataset ** 
+## Δ′17OBW Model and Dataset
 
 We generated a model for estimating δ17OBW, δ18OBW, and Δ′17OBW by modifying and adjusting the model and code developed by Hu et al. (2023). The Hu et al. (2023) model was derived from the δ18OBW model developed by Kohn (1996), modifying this model to enable calculation of Δ′17OBW. For specific details of the differences between our model and the Hu et al. (2023), please see the methods section of the manuscript. 
 
-This model estimates δ17OBW, δ18OBW, and Δ′17OBW using the following 30 parameters (in order of appearance in R code): 
+The model is included in the R file 'E17O_Isotope_Model'. This model estimates δ17OBW, δ18OBW, and Δ′17OBW using the following 32 parameters (in order of appearance in R code):
+
 Timeframe of turnover (Days)
 Animal body mass (kg)
 Fecal H2O content (%)
 Oxygen utilization fraction 
 Z-value (‰)
+Animal body temperature (K)
 Animal body temperature (C) 
 Meeh factor (proportionality constant - cm^2/kg^2/3) 
 skin H2O evaporation rate (species specific constant - mg/cm^2/h/mm Hg)
 Inhaled oxygen (mL)
 Exhaled CO2 (mole)
 Relative humidity (%)
+Ambient Temperature (K)
 Ambient Temperature (C)
 δ18O of meteoric water (‰)
 Δ′17O of meteoric water (per meg)

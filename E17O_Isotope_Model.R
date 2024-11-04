@@ -17,15 +17,17 @@ FecalH2O<- 0.55             # Fecal H2O content (%)
 Frac_used_O2<- 0.25         # Fraction of O2 used *oxygen utilization fractions (Rezende et al. 2004)
 Z_value<- 10.5              # Z-value *Kohn 1996 - see Zanconato et al. 1992
 Body_T<- 38+273.15          # Body temperature (K)
+Temp<- 38                   # Body temperature (C)
 meeh_factor<-1100           # Proportionality constant known as the Meeh factor (According to Dawson and Hulbert [1970] 
                             # k is often assumed to be ~ 1000, and has values of 1100-1200 for a variety of marsupials)
-TEWL<-0.3266746             # Transepidermal Water Loss (see Schmidt-Nielsen 1969)
+Skin_evap_constant<-0.025   # taxa-specific skin H2O evaporation rate (see Schmidt-Nielsen 1969)
 O2_resp_2<-5582             # Total amount of O2 consumed (mL)
 CO2<-  0.21417              # CO2 loss (moles)
 
 # Environmental Parameters
 rh<- 0.45                   # Relative humidity
 T<- 273.15+ 25              # Environment temperature (K)
+T_c<-25                     # Environment temperature (C)
 d18O_mw<- -4                # Meteoric water [pre-formed water] d18O composition (per mil)
 D17O_mw<- 0.020             # Meteoric water D17O composition (per mil)
 d18O_atmO2<- 24.046         # Atmospheric O2 d18O composition (Wostbrock et al. 2020)
@@ -122,7 +124,7 @@ T_in<-Condensation_Rxn_H2O+Oxidase_H2O+Air_H2O+Food_H2O+Drinking_H2O+Decarboxyla
 
 #    Output    #
 
-Breath_H2O<-Air_ex*10^(0.686+0.027*38)/760/22.4
+Breath_H2O<-Air_ex*10^(0.686+0.027*Temp)/760/22.4
 # Exhaled water vapor from breathing (mole)
 Oral_H2O_breath<-Breath_H2O/2      
 # Oral water loss through breathing                           
@@ -138,10 +140,16 @@ Urea_O2<-Food_urea/2
 # Urea/ureic acid O2 content (mole)
 Nasal_H2O<- Breath_H2O/4    
 # Nasal water vapor loss (mole)
-Perm<-(meeh_factor*TEWL/1000)*24/18 
-# Skin permeability factor calculated from TEWL and meeh factor
-Skin_H2O<- Perm*Mass^(2/3)*Days 
-# Transcutaneous water vapor loss  (mole)
+Vapor_Pressure_Deficit<-((610.78*exp((T_c/(T_c+237.3)*17.2694))/1000)*(1-(rh)))
+#kilopascals; For calculation of transcuatenous water vapor loss (Schmidt-Nielsen 1969)
+Vapor_Pressure_Deficit_mmHg<-Vapor_Pressure_Deficit*(760/101.325) 
+#convert Vapor_Pressure_Deficit to mmHg
+Skin_Vap<-Vapor_Pressure_Deficit_mmHg*Skin_evap_constant
+# Multiply by taxa specific skin H2O evaporation constant
+Perm<-(meeh_factor*Skin_Vap/1000)*24/18 
+# Skin permeability factor calculated from Skin_Vap and meeh factor
+Skin_H2O<- Perm*Mass^(2/3)*Days
+# Transcutaneous water vapor loss (mole)
 RQ<- CO2/O2_resp             
 # CO2/O2 ratio  
 Oral_H2O<-Oral_H2O_breath     
