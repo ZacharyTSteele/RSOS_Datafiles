@@ -5,36 +5,66 @@ We generated a model for estimating δ17OBW, δ18OBW, and Δ′17OBW by modifyin
 The model is included in the R file 'E17O_Isotope_Model'. This model estimates δ17OBW, δ18OBW, and Δ′17OBW using the following 32 parameters (in order of appearance in R code):
 
 Timeframe of turnover (Days)
+
 Animal body mass (kg)
+
 Fecal H2O content (%)
-Oxygen utilization fraction 
+
+Oxygen utilization fraction
+
 Z-value (‰)
+
 Animal body temperature (K)
-Animal body temperature (C) 
+
+Animal body temperature (C)
+
 Meeh factor (proportionality constant - cm^2/kg^2/3) 
+
 skin H2O evaporation rate (species specific constant - mg/cm^2/h/mm Hg)
+
 Inhaled oxygen (mL)
 Exhaled CO2 (mole)
+
 Relative humidity (%)
+
 Ambient Temperature (K)
+
 Ambient Temperature (C)
+
 δ18O of meteoric water (‰)
+
 Δ′17O of meteoric water (per meg)
+
 δ18O of atmospheric oxygen (‰)
+
 Δ′17O of atmospheric oxygen (per meg)
+
 Food consumed (kg)
+
 Water intake (mL)
+
 Relative Digestibility (%)
+
 Drinker Nozzle Leakage (%)
+
 Energy extraction efficiency (%)
+
 Carbohydrate content of diet (% by mass)
+
 Fat content of diet (% by mass)
+
 Lipid content of diet (% by mass)
+
 Food associated H2O content (%)
+
 Fractional contribution from different food items
-δ17O of different food items 
+
+δ17O of different food items
+
 δ18O of different food items
+
 Fractional contribution of different plant components of diet
+
 δ18O of different plant components of diet
 
 While there are 30 parameters in total, the majority of the parameters will be fixed for a specific study animal (e.g., skin H2O evaporation rate, Carbohydrate content, Fecal H2O content, etc.) and environment (ambient Temperature, δ18O of meteoric water
